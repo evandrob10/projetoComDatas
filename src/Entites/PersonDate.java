@@ -35,6 +35,9 @@ public class PersonDate {
 	public void setEndereco(Endereco [] endereco) {
 		this.endereco = endereco;
 	}
+	public Endereco[] getEndereco() {
+		return endereco; 
+	}
 	public void calculoIdade() {
 		LocalDateTime data_atual = LocalDateTime.now();
 		Duration tempo = Duration.between(dataNascimento, data_atual);
