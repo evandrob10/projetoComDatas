@@ -5,7 +5,9 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 //importação de Class
 import Entites.PersonDate;
@@ -16,12 +18,10 @@ public class Main {
 	public static void main(String[] args) {
 		
 		Locale.setDefault(Locale.US);
-		
-		LocalDateTime dataNascimento = LocalDateTime.parse("1996-03-13T14:30");
-		LocalDateTime data_atual = LocalDateTime.parse("2022-11-13T20:30");
-		PersonDate pessoa = new PersonDate("Evandro",20,dataNascimento);
+		ArrayList <PersonDate> usuarios = new ArrayList();
+
 		do {
-			redirect(showMenu());
+			redirect(showMenu(),usuarios);
 		}while(showMenu() != 0);
 	}
 	public static int showMenu() {
@@ -30,10 +30,12 @@ public class Main {
 		int opcao = input.nextInt();
 		return opcao;
 	}
-	public static void redirect(int opcaoEscolhida) {
+	public static void redirect(int opcaoEscolhida,ArrayList <PersonDate> pessoa) {
 		switch(opcaoEscolhida) {
 			case 1:
-				System.out.println("Você escolheu cadastrar usuario: ");
+				if(confirmOpcaoEscolhida("cadastrar usuarios")) {
+					cadastrarUsuario(pessoa);
+				}
 				break;
 			case 2:
 				System.out.println("Você escolheu cadastrar endereço:  ");
@@ -45,6 +47,37 @@ public class Main {
 				System.out.println("Opção invalida!");
 				break;
 		}
+	}
+	public static boolean confirmOpcaoEscolhida(String opcaoSelecionada) {
+		Scanner input = new Scanner(System.in);
+		System.out.printf("Você escolheu %s?%n",opcaoSelecionada);
+		System.out.println("1 - Sim");
+		System.out.println("2 - Não");
+		int opcao = input.nextInt();
+		if(opcao == 1) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	public static void cadastrarUsuario(ArrayList <PersonDate> usuarios) {
+		Scanner input = new Scanner(System.in);
+		
+		String matricula, nome, dataNascimento;
+		LocalDateTime dataNascimentoTime;
+	
+		System.out.println("Digite os dados abaixo: ");
+		System.out.println("Matricula: ");
+		matricula = input.nextLine();
+		System.out.println("Nome: ");
+		nome = input.nextLine();
+		System.out.println("Data de nascimento(00/00/0000): ");
+		dataNascimento = input.nextLine();
+		dataNascimentoTime = LocalDateTime.parse(dataNascimento, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+		
+		PersonDate pessoa = new PersonDate(matricula,nome,dataNascimentoTime);
+		
+		usuarios.add(pessoa);
 	}
 	public static void cadastrarEndereco(PersonDate pessoa) {
 		Scanner input = new Scanner(System.in);

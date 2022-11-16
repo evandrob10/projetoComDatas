@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.Duration;
 
 public class PersonDate {
+	private String matricula;
 	private String name;
 	private Integer idade;
 	private LocalDateTime dataNascimento;
@@ -11,9 +12,9 @@ public class PersonDate {
 	
 	public PersonDate() {	
 	}
-	public PersonDate(String name, Integer idade, LocalDateTime dataNascimento) {
+	public PersonDate(String matricula, String name , LocalDateTime dataNascimento) {
+		this.matricula = matricula;
 		this.name = name;
-		this.idade = idade;
 		this.dataNascimento = dataNascimento;
 	}
 	public void setName(String name) {
