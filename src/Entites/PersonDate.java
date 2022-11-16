@@ -1,6 +1,5 @@
 package Entites;
 //Importação de pacotes:
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Duration;
 
@@ -24,6 +23,7 @@ public class PersonDate {
 		return name;
 	}
 	public Integer getIdade() {
+		calculoIdade();
 		return idade;
 	}
 	public void setDataNascimento(LocalDateTime dataNascimento) {
@@ -35,9 +35,10 @@ public class PersonDate {
 	public void setEndereco(Endereco [] endereco) {
 		this.endereco = endereco;
 	}
-	public Long calculoIdade() {
-		LocalDate data_atual = LocalDate.now();
-		Duration diferencaDatas = Duration.between(dataNascimento, data_atual);
-		return diferencaDatas.toDays();
+	public void calculoIdade() {
+		LocalDateTime data_atual = LocalDateTime.now();
+		Duration tempo = Duration.between(dataNascimento, data_atual);
+		int idade = (int) tempo.toDays() / 365;
+		this.idade = idade;
 	}
 }

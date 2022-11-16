@@ -14,8 +14,8 @@ public class Main {
 		LocalDateTime data_atual = LocalDateTime.parse("2022-11-13T20:30");
 		PersonDate pessoa = new PersonDate("Evandro",20,dataNascimento);
 		
-		Duration tempo = Duration.between(dataNascimento, data_atual);
-		System.out.println(tempo.toDays());
+		
+		System.out.println(pessoa.getIdade());
 		
 	}
 }
