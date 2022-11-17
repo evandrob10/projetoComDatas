@@ -50,6 +50,6 @@ public class PersonDate {
 		this.idade = idade;
 	}
 	public String toString() {
-		return String.format("Matricula: %s | Nome: %s | Data de nascimento: %s | Idade: %d",matricula,name,dataNascimento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),getIdade());
+		return String.format("Matricula: %s | Nome: %s | Data de nascimento: %s | Idade: %d%n",matricula,name,dataNascimento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),getIdade());
 	}
 }

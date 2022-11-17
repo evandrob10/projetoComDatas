@@ -51,6 +51,11 @@ public class Main {
 					PersonDate usuario = localizar_usuario(pessoa); 
 					if(usuario.getName() != null) {
 						System.out.println(usuario.toString());
+						if(usuario.getEndereco() != null) {
+							for(int i = 0; i < usuario.getEndereco().length;i++){
+								System.out.println(usuario.getEndereco()[i].toString());
+							}
+						}
 					}
 				}
 				break;
@@ -158,6 +163,8 @@ public class Main {
 		
 		Endereco[] endereco =  new Endereco [numeroEndereco];
 		
+		int countEnderecos = 0;
+		
 		do {
 			System.out.println("Digite a rua: ");
 			rua = input.nextLine();
@@ -171,18 +178,11 @@ public class Main {
 			estado = input.nextLine();
 			System.out.println("(Opcional) Digite o complemento: ");
 			complemento = input.nextLine();
-			
-			for(int i = 0; i < endereco.length; i++) {
-				if(endereco[i] == null) {
-					endereco[i] = new Endereco(rua,numeroCasa,bairro,cidade,estado,complemento);
-				}
-			}
-			
+			endereco[countEnderecos] = new Endereco(rua,numeroCasa,bairro,cidade,estado,complemento);
+			countEnderecos++;
 			--numeroEndereco;
 		}while(numeroEndereco != 0);
 		
 		pessoa.setEndereco(endereco);
-		
-		input.close();
 	}
 }
