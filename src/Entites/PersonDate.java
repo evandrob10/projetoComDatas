@@ -1,6 +1,7 @@
 package Entites;
 //Importação de pacotes:
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.Duration;
 
 public class PersonDate {
@@ -16,6 +17,9 @@ public class PersonDate {
 		this.matricula = matricula;
 		this.name = name;
 		this.dataNascimento = dataNascimento;
+	}
+	public String getMatricula() {
+		return matricula;
 	}
 	public void setName(String name) {
 		this.name = name;
@@ -44,5 +48,8 @@ public class PersonDate {
 		Duration tempo = Duration.between(dataNascimento.atStartOfDay(), data_atual.atStartOfDay());
 		int idade = (int) tempo.toDays() / 365;
 		this.idade = idade;
+	}
+	public String toString() {
+		return String.format("Matricula: %s | Nome: %s | Data de nascimento: %s | Idade: %d",matricula,name,dataNascimento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),getIdade());
 	}
 }

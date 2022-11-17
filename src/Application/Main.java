@@ -25,7 +25,7 @@ public class Main {
 	}
 	public static int showMenu() {
 		Scanner input = new Scanner(System.in);
-		System.out.printf("Oque deseja fazer? %n1 - Cadastrar usuario%n2 - Cadastrar endereço%n0 - Sair%n");
+		System.out.printf("Oque deseja fazer? %n1 - Cadastrar usuario%n2 - Cadastrar endereço%n3 - Consultar usuario%n0 - Sair%n");
 		int opcao = input.nextInt();
 		return opcao;
 	}
@@ -37,8 +37,14 @@ public class Main {
 				}
 				break;
 			case 2:
-				System.out.println("Você escolheu cadastrar endereço:  ");
+				if(confirmOpcaoEscolhida("cadastrar endereço")) {
+					System.out.println(localizar_usuario("3020",pessoa));
+				}
 				break;
+			case 3:
+				if(confirmOpcaoEscolhida("cadastrar usuarios")) {
+					
+				}
 			case 0:
 				System.out.println("Sistema finalizado com sucesso!");
 				break;
@@ -46,6 +52,17 @@ public class Main {
 				System.out.println("Opção invalida!");
 				break;
 		}
+	}
+	public static String localizar_usuario(String matricula, ArrayList <PersonDate> pessoa) {
+		String resultado_busca = "";
+		for(PersonDate usuarios : pessoa) {
+			if(usuarios.getMatricula().equals(matricula)) {
+				resultado_busca = usuarios.toString();
+			}else {
+				resultado_busca = "Usuario não localizado!";
+			}
+		}
+		return resultado_busca;
 	}
 	public static boolean confirmOpcaoEscolhida(String opcaoSelecionada) {
 		Scanner input = new Scanner(System.in);
