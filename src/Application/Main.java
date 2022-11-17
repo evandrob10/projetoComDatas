@@ -19,9 +19,11 @@ public class Main {
 		
 		Locale.setDefault(Locale.US);
 		ArrayList <PersonDate> usuarios = new ArrayList();
+		int opcao = -1;
 		do {
-			redirect(showMenu(),usuarios);
-		}while(showMenu() != 0);
+			opcao = showMenu();
+			redirect(opcao,usuarios);
+		}while(opcao != 0);
 	}
 	public static int showMenu() {
 		Scanner input = new Scanner(System.in);
@@ -38,13 +40,17 @@ public class Main {
 				break;
 			case 2:
 				if(confirmOpcaoEscolhida("cadastrar endereço")) {
-					System.out.println(localizar_usuario("3020",pessoa));
+					PersonDate usuario = localizar_usuario(pessoa); 
+					if(usuario.getName() != null) {
+						cadastrarEndereco(usuario);
+					}
 				}
 				break;
 			case 3:
-				if(confirmOpcaoEscolhida("cadastrar usuarios")) {
-					
+				if(confirmOpcaoEscolhida("consultar usuario")) {
+					localizar_usuario(pessoa).toString();
 				}
+				break;
 			case 0:
 				System.out.println("Sistema finalizado com sucesso!");
 				break;
@@ -53,15 +59,38 @@ public class Main {
 				break;
 		}
 	}
-	public static String localizar_usuario(String matricula, ArrayList <PersonDate> pessoa) {
-		String resultado_busca = "";
-		for(PersonDate usuarios : pessoa) {
-			if(usuarios.getMatricula().equals(matricula)) {
-				resultado_busca = usuarios.toString();
-			}else {
-				resultado_busca = "Usuario não localizado!";
+	public static PersonDate localizar_usuario(ArrayList <PersonDate> pessoa) {
+		Scanner input = new Scanner(System.in);
+		PersonDate resultado_busca = new PersonDate();
+		boolean confirmacao_usuario = true;
+		
+		do {
+			System.out.println("Digite a matricula do usuario: ");
+			String matricula = input.nextLine();
+			int opcao = 0;
+			for(PersonDate usuarios : pessoa) {
+				if(usuarios.getMatricula().equalsIgnoreCase(matricula)) {
+					resultado_busca = usuarios;
+				}
 			}
-		}
+			if(resultado_busca.getName() != null) {
+				System.out.println("Usuario desejado é: " + resultado_busca.getName() + "?");
+				System.out.printf("1 - Sim%n2 - Não%n");
+				opcao = input.nextInt();
+				input.nextLine();
+				if(opcao == 1) {
+					confirmacao_usuario = false;
+				}
+			}else {
+				System.out.println("Usuario não localizado!");
+				System.out.printf("Deseja tentar novamente?%n1 - Sim%n2 - Não%n");
+				opcao = input.nextInt();
+				if(opcao != 1) {
+					confirmacao_usuario = false;
+				}
+				input.nextLine();
+			}
+		}while(confirmacao_usuario);
 		return resultado_busca;
 	}
 	public static boolean confirmOpcaoEscolhida(String opcaoSelecionada) {
