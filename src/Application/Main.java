@@ -19,7 +19,6 @@ public class Main {
 		
 		Locale.setDefault(Locale.US);
 		ArrayList <PersonDate> usuarios = new ArrayList();
-
 		do {
 			redirect(showMenu(),usuarios);
 		}while(showMenu() != 0);
@@ -64,7 +63,7 @@ public class Main {
 		Scanner input = new Scanner(System.in);
 		
 		String matricula, nome, dataNascimento;
-		LocalDateTime dataNascimentoTime;
+		LocalDate dataNascimentoTime;
 	
 		System.out.println("Digite os dados abaixo: ");
 		System.out.println("Matricula: ");
@@ -73,7 +72,7 @@ public class Main {
 		nome = input.nextLine();
 		System.out.println("Data de nascimento(00/00/0000): ");
 		dataNascimento = input.nextLine();
-		dataNascimentoTime = LocalDateTime.parse(dataNascimento, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+		dataNascimentoTime = LocalDate.parse(dataNascimento, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		
 		PersonDate pessoa = new PersonDate(matricula,nome,dataNascimentoTime);
 		
