@@ -27,7 +27,7 @@ public class Main {
 	}
 	public static int showMenu() {
 		Scanner input = new Scanner(System.in);
-		System.out.printf("Oque deseja fazer? %n1 - Cadastrar usuario%n2 - Cadastrar endereço%n3 - Consultar usuario%n0 - Sair%n");
+		System.out.printf("Oque deseja fazer? %n1 - Cadastrar usuario%n2 - Cadastrar endereço%n3 - Consultar usuario%n4 - Deletar usuario%n0 - Sair%n");
 		int opcao = input.nextInt();
 		return opcao;
 	}
@@ -48,7 +48,18 @@ public class Main {
 				break;
 			case 3:
 				if(confirmOpcaoEscolhida("consultar usuario")) {
-					localizar_usuario(pessoa).toString();
+					PersonDate usuario = localizar_usuario(pessoa); 
+					if(usuario.getName() != null) {
+						System.out.println(usuario.toString());
+					}
+				}
+				break;
+			case 4:
+				if(confirmOpcaoEscolhida("deletar usuario")) {
+					PersonDate usuario = localizar_usuario(pessoa); 
+					if(usuario.getName() !=null) {
+						deletarUsuario(usuario,pessoa);	
+					}
 				}
 				break;
 			case 0:
@@ -57,6 +68,18 @@ public class Main {
 			default:
 				System.out.println("Opção invalida!");
 				break;
+		}
+	}
+	public static void deletarUsuario(PersonDate usuario,ArrayList <PersonDate> pessoa) {
+		Scanner input = new Scanner(System.in);
+		System.out.printf("Deseja realmente excluir %s?%n1 - Sim%n2 - Não%n",usuario.getName());
+		int opcao = input.nextInt();
+		if(opcao == 1) {
+			System.out.printf("Usuario, %s. deletado com sucesso!%n",usuario.getName());
+			pessoa.remove(usuario);
+			
+		}else {
+			System.out.println("Cancelado operação de remoção!");
 		}
 	}
 	public static PersonDate localizar_usuario(ArrayList <PersonDate> pessoa) {
